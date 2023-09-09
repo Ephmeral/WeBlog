@@ -48,3 +48,34 @@ func (sc *SignupController) IsPhoneExist(c *gin.Context) {
 		"exist": user.IsPhoneExist(request.Phone),
 	})
 }
+
+func (sc *SignupController) IsEmailExist(c *gin.Context) {
+	// 初始化请求对象
+	request := requests.SignupEmailExistRequest{}
+
+	// 解析JSON请求
+	if err := c.ShouldBind(&request); err != nil {
+		// 解析失败，返回422错误码和状态信息
+		c.AbortWithStatusJSON(http.StatusUnprocessableEntity, gin.H{
+			"error": err.Error(),
+		})
+		// 打印错误信息
+		fmt.Println(err.Error())
+		// 出错了，中断请求
+		return
+	}
+
+	// 表单验证
+	errs := requests.ValidateSignupEmailExist(&request, c)
+	// errs 长度对于0即通过，大于0有错误发生
+	if len(errs) > 0 {
+		c.AbortWithStatusJSON(http.StatusUnprocessableEntity, gin.H{
+			"errors": errs,
+		})
+		return
+	}
+	//  检查数据库并返回响应
+	c.JSON(http.StatusOK, gin.H{
+		"exist": user.IsEmailExist(request.Email),
+	})
+}
