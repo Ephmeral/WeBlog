@@ -3,9 +3,9 @@ package bootstrap
 import (
 	"errors"
 	"fmt"
+	"gohub/app/models/user"
 	"gohub/pkg/config"
 	"gohub/pkg/database"
-	"os/user"
 	"time"
 
 	"gorm.io/driver/mysql"
