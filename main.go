@@ -25,7 +25,8 @@ func main() {
 
 	// 创建一个Gin实例
 	router := gin.New()
-
+	// 初始化 Logger
+	bootstrap.SetupLogger()
 	// 初始化DB
 	bootstrap.SetupDB()
 	// 初始化路由绑定
