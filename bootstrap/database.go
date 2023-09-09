@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"gorm.io/driver/mysql"
-	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 )
@@ -32,10 +31,6 @@ func SetupDB() {
 		dbConfig = mysql.New(mysql.Config{
 			DSN: dsn,
 		})
-	case "sqlite":
-		// 初始化 sqlite
-		database := config.Get("database.sqlite.database")
-		dbConfig = sqlite.Open(database)
 	default:
 		panic(errors.New("database connetion not supported"))
 	}
