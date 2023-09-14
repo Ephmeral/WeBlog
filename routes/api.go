@@ -34,8 +34,10 @@ func RegisterAPIRoutes(r *gin.Engine) {
 			// 图片验证码，需要加限流
 			authGroup.POST("/verify-codes/captcha", vcc.ShowCaptcha)
 			authGroup.POST("/verify-codes/email", vcc.SendUsingEmail)
-
+			// 邮箱注册
 			authGroup.POST("/signup/using-email", suc.SignupUsingEmail)
+			// 使用手机号，短信验证码进行登录
+			// authGroup.POST("/login/using-phone", lgc.LoginByPhone)
 		}
 	}
 }
